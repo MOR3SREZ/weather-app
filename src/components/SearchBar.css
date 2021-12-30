@@ -1,0 +1,25 @@
+.search {
+  position: absolute;
+  bottom: 20px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+.search input {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 5px;
+  outline: none;
+  color: rgb(66, 99, 93);
+  font-weight: 700;
+}
+.search button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgb(66, 99, 93);
+  color: white;
+  cursor: pointer;
+}
