@@ -1,0 +1,9 @@
+.weather-bg {
+  height: 300px;
+  overflow: hidden;
+}
+.weather-bg img {
+  height: 100%;
+
+  margin: 0 auto;
+}
