@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import bgWeather from '../assets/bghome.jpg';
+import Loader from './Loader';
+import 'animate.css';
 
 //styles
 import './Weather.css';
@@ -8,7 +10,7 @@ const Weather = () => {
   //states
   const [result, setResult] = useState({});
   const [city, setCity] = useState('');
-
+  const [load, setLoad] = useState(false);
   const [first, setFirst] = useState(true);
   const [error, setError] = useState('');
 
@@ -18,6 +20,7 @@ const Weather = () => {
 
   //- Fetch
   const fetchWeather = useCallback(async () => {
+    setLoad(true);
     const response = await fetch(url);
     const json = await response.json();
     if (json.cod === '404') {
@@ -27,6 +30,7 @@ const Weather = () => {
     }
 
     setResult(json);
+    setLoad(false);
   }, [url]);
 
   useEffect(() => {
@@ -45,15 +49,15 @@ const Weather = () => {
 
   return (
     <div className='weather-app'>
-      {result.main && (
-        <div className='display'>
-          <div className='city'>
+      {!!result.main & !!!load ? (
+        <div className='display '>
+          <div className='city animate__animated animate__fadeIn'>
             <h2>
               {result.name}, {result.sys.country}
             </h2>
             <p>{Math.round(result.main.temp)} &#176;C</p>
           </div>
-          <div className='weather-icon'>
+          <div className='weather-icon animate__animated animate__fadeIn'>
             <img
               src={`http://openweathermap.org/img/wn/${result.weather[0].icon}@2x.png`}
               alt='weather-icon'
@@ -61,12 +65,24 @@ const Weather = () => {
             <p className='week'> {result.weather[0].description}</p>
           </div>
         </div>
-      )}
+      ) : null}
 
-      {first && (
-        <div className='display pm'> Search for weather of your city</div>
+      {first & !load ? (
+        <div className='display pm'> Search for weather of your city 👀</div>
+      ) : null}
+      {load && (
+        <div className='display pm'>
+          <Loader />
+        </div>
       )}
-      {error && <div className='display pm'> {error}</div>}
+      {!!error & !!!load ? (
+        <div className='display pm '>
+          <span className='animate__animated animate__bounceIn'>
+            {error} ❗
+            <br />☹
+          </span>
+        </div>
+      ) : null}
 
       <div className='weather-bg'>
         <img src={bgWeather} alt='background for app' />

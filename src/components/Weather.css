@@ -30,6 +30,8 @@
 .display.pm {
   align-items: center;
   justify-content: center;
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 .city {
@@ -55,6 +57,9 @@
   filter: drop-shadow(5px 5px 5px #353434d3);
   background-color: rgb(206, 206, 206);
   border-radius: 50%;
+}
+.week {
+  text-align: center;
 }
 
 .search {
